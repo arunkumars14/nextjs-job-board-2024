@@ -79,11 +79,11 @@ function OnBoard() {
    }
 
     return (
-        <div className="bg-white">
+        <div className="bg-white dark:bg-black">
             <Tabs value={currentTab} onValueChange={handleTabChange}>
                 <div className="w-full">
                     <div className="flex items-center justify-between border-b pb-6 pt-24">
-                        <h1 className="text-4xl font-bold tracking-tight text-gray-900">Welcome to Onboard</h1>
+                        <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white">Welcome to Onboard</h1>
                         <TabsList>
                             <TabsTrigger value="candidate">
                                 Candidate
