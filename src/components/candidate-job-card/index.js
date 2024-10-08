@@ -34,7 +34,7 @@ function CandidateJobCard({ jobItem, profileInfo, jobApplications}) {
             })
             return;
         }
-        if(profileInfo?.isPremiumUser && profileInfo?.memberShipType==="Basic" && jobApplications.length >= 5) {
+        if(profileInfo?.isPremiumUser && profileInfo?.memberShipType==="Teams" && jobApplications.length >= 5) {
             setShowJobDetailsDrawer(false)
             toast({
                 title: "You can apply max 5 jobs",
