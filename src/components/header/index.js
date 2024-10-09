@@ -6,9 +6,11 @@ import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../ui/sheet";
 import Link from "next/link";
 import { UserButton } from "@clerk/nextjs";
 import { useTheme } from "next-themes";
+import {useState} from "react"
 
 function Header({ user, profileInfo }) {
     const { theme, setTheme } = useTheme()
+    const [openSidebar, setOpenSidebar] = useState(false)
 
     const menuItems = [
         {
@@ -61,7 +63,7 @@ function Header({ user, profileInfo }) {
     return (
         <div>
             <header className="flex h-16 w-full shrink-0 items-center">
-                <Sheet>
+                <Sheet open={openSidebar} onOpenChange={setOpenSidebar}>
                     <SheetTrigger asChild>
                         <Button className="lg:hidden">
                             <AlignJustify className="h-6 w-6" />
@@ -74,11 +76,17 @@ function Header({ user, profileInfo }) {
 
                         <div className="gird gap-2 py-6">
                             {
-                                menuItems.map(menuitem => menuitem.show ? <Link key={menuitem.label} href={menuitem.path} className="flex w-full items-center py-2 text-lg font-semibold" onClick={() => sessionStorage.removeItem("filterParams")}>
+                                menuItems.map(menuitem => menuitem.show ? <Link key={menuitem.label} href={menuitem.path} className="flex w-full items-center py-2 text-lg font-semibold" onClick={() => {
+                                    sessionStorage.removeItem("filterParams")
+                                    setOpenSidebar(false)
+                                }}>
                                     {menuitem.label}
                                 </Link> : null)
                             }
-                            <Moon className="cursor-pointer mb-3" fill={theme === "dark" ? "light" : "dark"} onClick={() => setTheme(theme === "light" ? "dark" : "light")} />
+                            <Moon className="cursor-pointer mb-3" fill={theme === "dark" ? "light" : "dark"} onClick={() => {
+                                setTheme(theme === "light" ? "dark" : "light")
+                                setOpenSidebar(false)
+                            }} />
                             <UserButton afterSignOutUrl="/" />
                         </div>
                     </SheetContent>
